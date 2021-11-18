@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "615689625158",
+    "firebase_url": "https://sehatq-redesign-default-rtdb.firebaseio.com",
+    "project_id": "sehatq-redesign",
+    "storage_bucket": "sehatq-redesign.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615689625158:android:33984a4dfa56d5fd003447",
+        "android_client_info": {
+          "package_name": "com.example.sehatq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615689625158-d21skun5d8r220ojmq2r561ojvt9af02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sehatq",
+            "certificate_hash": "6269bcfa853e6a026a4575e6139e228ca76c003c"
+          }
+        },
+        {
+          "client_id": "615689625158-7c7h25da1cjpctg9qfotcgo2ikltm13p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-Px0amddagr7Re5ifaJp0nbZqBOl2dvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615689625158-7c7h25da1cjpctg9qfotcgo2ikltm13p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
