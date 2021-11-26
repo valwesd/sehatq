@@ -1,19 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sehatq/constant.dart';
+import 'package:sehatq/screen/pilih_jadwal_dokter.dart';
 
-import 'package:firebase_database/firebase_database.dart';
-import 'package:sehatq/screen/rumah_sakit_detail.dart';
-
-class BuatJanji extends StatefulWidget {
-  const BuatJanji({Key? key}) : super(key: key);
+class DokterScreen extends StatefulWidget {
+  const DokterScreen({Key? key}) : super(key: key);
 
   @override
-  State<BuatJanji> createState() => _BuatJanjiState();
+  State<DokterScreen> createState() => _DokterScreenState();
 }
 
-class _BuatJanjiState extends State<BuatJanji> {
-  final _dataRS = FirebaseDatabase.instance.reference();
+class _DokterScreenState extends State<DokterScreen> {
+  final _dataDokter = FirebaseDatabase.instance.reference();
+
+  PageController pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +32,7 @@ class _BuatJanjiState extends State<BuatJanji> {
           ),
         ),
         title: Text(
-          'Buat Janji',
+          'Dokter',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -76,10 +78,9 @@ class _BuatJanjiState extends State<BuatJanji> {
                   ),
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: "Ketik disini untuk mencari",
-                      hintStyle: TextStyle(
-                          fontSize: 18,
-                          color: mSecondaryTextColor.withOpacity(0.75)),
+                      hintText: "Ketik disini untuk mencari....",
+                      hintStyle:
+                          TextStyle(fontSize: 18, color: mSecondaryTextColor),
                       suffixIcon: Icon(
                         Icons.search,
                         size: 30,
@@ -95,6 +96,7 @@ class _BuatJanjiState extends State<BuatJanji> {
         ),
       ),
       body: PageView(
+        controller: pageController,
         children: [
           SingleChildScrollView(
             child: SafeArea(
@@ -104,36 +106,45 @@ class _BuatJanjiState extends State<BuatJanji> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        "Pilih Fasilitas Kesehatan",
-                        style: TextStyle(
-                          color: mSecondaryTextColor.withOpacity(0.75),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
+                    SizedBox(
+                      height: 5,
                     ),
-                    SizedBox(height: 5),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Dokter Tersedia",
+                              style: TextStyle(
+                                color: mSecondaryTextColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ]),
+                    ),
+                    SizedBox(height: 15),
                     StreamBuilder(
-                      stream: _dataRS.child('rumahsakit').orderByKey().onValue,
+                      stream: _dataDokter
+                          .child('dokter_tanya')
+                          .orderByKey()
+                          .onValue,
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         final tilesList = <ListTile>[];
                         if (snapshot.hasData) {
-                          final rumahSakitList = Map<String, dynamic>.from(
+                          final dokterList = Map<String, dynamic>.from(
                               (snapshot.data! as Event).snapshot.value);
-                          rumahSakitList.forEach((key, value) {
-                            final infoRumahSakit =
-                                Map<String, dynamic>.from(value);
-                            final rumahSakitTile = ListTile(
+                          dokterList.forEach((key, value) {
+                            final infoDokter = Map<String, dynamic>.from(value);
+                            final dokterTile = ListTile(
                               title: InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => RumahSakitDetail(
-                                          rsAlamat: infoRumahSakit['alamat'],
-                                          rsFoto: infoRumahSakit['foto'],
-                                          rsNama: infoRumahSakit['nama'])));
+                                      builder: (context) => PilihJadwalDok(
+                                          foto: infoDokter['gambar'],
+                                          nama: infoDokter['nama'],
+                                          spesialis: infoDokter['spesialis'])));
                                 },
                                 child: Container(
                                   padding: EdgeInsets.symmetric(vertical: 20),
@@ -149,15 +160,6 @@ class _BuatJanjiState extends State<BuatJanji> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(20),
-                                        child: CachedNetworkImage(
-                                          imageUrl: infoRumahSakit['foto'],
-                                          height: 80,
-                                          width: 100,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
                                       Container(
                                         width: 200,
                                         child: Column(
@@ -170,31 +172,85 @@ class _BuatJanjiState extends State<BuatJanji> {
                                               text: TextSpan(
                                                 children: [
                                                   TextSpan(
-                                                    text:
-                                                        infoRumahSakit['nama'],
+                                                    text: infoDokter['nama'],
                                                     style: TextStyle(
-                                                      fontSize: 16,
+                                                      fontSize: 18,
                                                       fontWeight:
-                                                          FontWeight.bold,
+                                                          FontWeight.normal,
                                                       color:
                                                           mSecondaryTextColor,
                                                     ),
                                                   ),
                                                   TextSpan(text: '\n\n'),
                                                   TextSpan(
-                                                    text: infoRumahSakit[
-                                                        'alamat'],
+                                                    text:
+                                                        infoDokter['spesialis'],
                                                     style: TextStyle(
-                                                      fontSize: 14,
+                                                      height: 0.4,
+                                                      letterSpacing: 0.3,
+                                                      fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.normal,
-                                                      color: Colors.grey,
+                                                      color: mPrimaryColor,
+                                                    ),
+                                                  ),
+                                                  TextSpan(text: '\n'),
+                                                  TextSpan(
+                                                    text: "SehatQ",
+                                                    style: TextStyle(
+                                                      height: 2,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      color:
+                                                          mSecondaryTextColor,
                                                     ),
                                                   ),
                                                 ],
                                               ),
                                             ),
+                                            SizedBox(height: 10),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Icon(
+                                                  Icons.medical_services,
+                                                  color: mPrimaryColor,
+                                                  size: 15,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  infoDokter['pengalaman'],
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 16,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(height: 10),
+                                            Text(
+                                              infoDokter['harga'],
+                                              style: TextStyle(
+                                                  color: mPrimaryColor,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            )
                                           ],
+                                        ),
+                                      ),
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(40),
+                                        child: CachedNetworkImage(
+                                          imageUrl: infoDokter['gambar'],
+                                          height: 80,
+                                          width: 80,
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                     ],
@@ -202,7 +258,7 @@ class _BuatJanjiState extends State<BuatJanji> {
                                 ),
                               ),
                             );
-                            tilesList.add(rumahSakitTile);
+                            tilesList.add(dokterTile);
                           });
                           return Container(
                             decoration: BoxDecoration(

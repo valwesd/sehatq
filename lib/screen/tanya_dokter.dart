@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sehatq/constant.dart';
+import 'package:sehatq/screen/detail_dokter.dart';
 
 class TanyaDokter extends StatefulWidget {
   const TanyaDokter({Key? key}) : super(key: key);
@@ -10,6 +13,7 @@ class TanyaDokter extends StatefulWidget {
 
 class _TanyaDokterState extends State<TanyaDokter> {
   PageController pageController = PageController();
+  final _dataDokter = FirebaseDatabase.instance.reference();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,9 +22,12 @@ class _TanyaDokterState extends State<TanyaDokter> {
         backgroundColor: mPrimaryColor,
         leading: IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/homePage');
+            Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(
+            Icons.arrow_back,
+            size: 40,
+          ),
         ),
         title: Text(
           'Tanya Dokter',
@@ -34,7 +41,10 @@ class _TanyaDokterState extends State<TanyaDokter> {
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.history),
+              icon: Icon(
+                Icons.history,
+                size: 40,
+              ),
             ),
           )
         ],
@@ -67,9 +77,8 @@ class _TanyaDokterState extends State<TanyaDokter> {
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: "Ketik disini untuk mencari....",
-                      hintStyle: TextStyle(
-                          fontSize: 18,
-                          color: mSecondaryTextColor.withOpacity(0.90)),
+                      hintStyle:
+                          TextStyle(fontSize: 18, color: mSecondaryTextColor),
                       suffixIcon: Icon(
                         Icons.search,
                         size: 30,
@@ -87,24 +96,36 @@ class _TanyaDokterState extends State<TanyaDokter> {
       body: PageView(
         controller: pageController,
         children: [
-          Stack(
-            children: <Widget>[
-              SafeArea(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/tanyagratis');
-                        },
-                        child: Container(
-                          margin: EdgeInsets.symmetric(vertical: 20),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: kDefaultPadding, vertical: 10),
-                          height: 120,
+          SingleChildScrollView(
+            child: SafeArea(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(top: kDefaultPadding),
+                      child: Text(
+                        "Tanya Dokter Gratis Disini",
+                        style: TextStyle(
+                          color: mSecondaryTextColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      height: 120,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/tanyaGratis');
+                          },
                           child: Row(
                             children: [
                               ClipRRect(
@@ -115,65 +136,261 @@ class _TanyaDokterState extends State<TanyaDokter> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              Padding(
+                              Container(
+                                width: 251,
                                 padding: EdgeInsets.symmetric(
                                   vertical: 10,
                                   horizontal: kDefaultPadding,
                                 ),
-                                child: Column(
-                                  children: <Widget>[
-                                    RichText(
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: "Tanya Dokter Gratis\n\n",
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: mPrimaryColor,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text:
-                                                "Konsultasi saat isoman atau \nkondisi kesehatan lainnya",
-                                            style: TextStyle(
-                                              letterSpacing: 0.3,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.normal,
-                                              color: mSecondaryTextColor,
-                                            ),
-                                          ),
-                                        ],
+                                child: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: "Tanya Dokter Gratis Disini\n\n",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: mPrimaryColor,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                      TextSpan(
+                                        text: "Konsultasi saat isoman atau \n",
+                                        style: TextStyle(
+                                          letterSpacing: 0.3,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal,
+                                          color: mSecondaryTextColor,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: "kondisi kesehatan lainnya",
+                                        style: TextStyle(
+                                          height: 1.5,
+                                          letterSpacing: 0.3,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal,
+                                          color: mSecondaryTextColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               )
                             ],
                           ),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 0.45,
-                              color: mPrimaryColor,
-                            ),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(13),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 8),
-                                spreadRadius: 2,
-                                blurRadius: 4,
-                                color: mPrimaryColor.withOpacity(0.15),
-                              ),
-                            ],
-                          ),
                         ),
                       ),
-                    ],
-                  ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 0.45,
+                          color: mPrimaryColor,
+                        ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(13),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(0, 8),
+                            spreadRadius: 2,
+                            blurRadius: 4,
+                            color: mPrimaryColor.withOpacity(0.15),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Dokter Tersedia",
+                              style: TextStyle(
+                                color: mSecondaryTextColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            OutlinedButton(
+                              onPressed: () {},
+                              style: OutlinedButton.styleFrom(
+                                primary: mPrimaryColor,
+                                backgroundColor: mPrimaryTextColor,
+                                side: BorderSide(color: mPrimaryColor),
+                              ),
+                              child: Text(
+                                "Lihat Semua",
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ]),
+                    ),
+                    SizedBox(height: 15),
+                    StreamBuilder(
+                      stream: _dataDokter
+                          .child('dokter_tanya')
+                          .orderByKey()
+                          .onValue,
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        final tilesList = <ListTile>[];
+                        if (snapshot.hasData) {
+                          final dokterList = Map<String, dynamic>.from(
+                              (snapshot.data! as Event).snapshot.value);
+                          dokterList.forEach((key, value) {
+                            final infoDokter = Map<String, dynamic>.from(value);
+                            final dokterTile = ListTile(
+                              title: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => DetailDokter(
+                                          dokFoto: infoDokter['gambar'],
+                                          dokHarga: infoDokter['harga'],
+                                          dokNama: infoDokter['nama'],
+                                          dokSpesialis:
+                                              infoDokter['spesialis'])));
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: 20),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            width: 1, color: Colors.grey)),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Container(
+                                        width: 200,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: infoDokter['nama'],
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      color:
+                                                          mSecondaryTextColor,
+                                                    ),
+                                                  ),
+                                                  TextSpan(text: '\n\n'),
+                                                  TextSpan(
+                                                    text:
+                                                        infoDokter['spesialis'],
+                                                    style: TextStyle(
+                                                      height: 0.4,
+                                                      letterSpacing: 0.3,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      color: mPrimaryColor,
+                                                    ),
+                                                  ),
+                                                  TextSpan(text: '\n'),
+                                                  TextSpan(
+                                                    text: "SehatQ",
+                                                    style: TextStyle(
+                                                      height: 2,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      color:
+                                                          mSecondaryTextColor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(height: 10),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Icon(
+                                                  Icons.medical_services,
+                                                  color: mPrimaryColor,
+                                                  size: 15,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  infoDokter['pengalaman'],
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 16,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(height: 10),
+                                            Text(
+                                              infoDokter['harga'],
+                                              style: TextStyle(
+                                                  color: mPrimaryColor,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(40),
+                                        child: CachedNetworkImage(
+                                          imageUrl: infoDokter['gambar'],
+                                          height: 80,
+                                          width: 80,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                            tilesList.add(dokterTile);
+                          });
+                          return Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(13),
+                                border: Border.all(
+                                    color: Colors.grey.withOpacity(0.25),
+                                    width: 1)),
+                            child: ListView(
+                              padding: EdgeInsets.all(5),
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              children: tilesList,
+                            ),
+                          );
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-              )
-            ],
+              ),
+            ),
           ),
         ],
       ),

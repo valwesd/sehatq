@@ -7,10 +7,12 @@ import 'package:sehatq/screen/beli_obat.dart';
 
 import 'package:sehatq/screen/buat_janji.dart';
 import 'package:sehatq/screen/daftar_tanyadok.dart';
+import 'package:sehatq/screen/edit_profile.dart';
 import 'package:sehatq/screen/home_screen.dart';
 
-import 'package:sehatq/screen/login_screen.dart';
+import 'package:sehatq/screen/profile_screen.dart';
 import 'package:sehatq/screen/tanya_dokter.dart';
+import 'package:sehatq/widget/login_check.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,16 +31,17 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: mBackgroundColor,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: LoginScreen(),
+          home: LoginCheck(),
           initialRoute: '/homePage',
           routes: {
             '/homePage': (context) => HomeScreen(),
             '/tanyaDok': (context) => TanyaDokter(),
             '/beliObat': (context) => BeliObat(),
             '/buatJanji': (context) => BuatJanji(),
-
-            '/tanyagratis': (context) => TanyaGratis(),
+            '/profil': (context) => ProfileScreen(),
+            '/tanyaGratis': (context) => TanyaGratis(),
             //'/artikelPage': (context)=> HomeScreen(),
+            '/editProfile': (context) => EditProfile(),
           },
         ),
       );

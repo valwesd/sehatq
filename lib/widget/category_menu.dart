@@ -42,7 +42,7 @@ class CategoryMenu extends StatelessWidget {
                 judul,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: mSecondaryTextColor.withOpacity(0.75),
+                  color: mSecondaryTextColor,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),

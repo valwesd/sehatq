@@ -1,13 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sehatq/constant.dart';
 import 'package:sehatq/screen/beli_obat.dart';
+import 'package:sehatq/screen/buat_janji.dart';
+import 'package:sehatq/screen/dokter_page.dart';
+import 'package:sehatq/screen/keranjang.dart';
 import 'package:sehatq/screen/profile_screen.dart';
 import 'package:sehatq/screen/tanya_dokter.dart';
-//import 'package:sehatq/icons.dart';
-//import 'package:sehatq/constant.dart';
-//import 'package:sehatq/screen/splash/body.dart';
 import 'package:sehatq/widget/category_menu.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,26 +32,26 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda\n'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.search), label: 'Tanya Dokter'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Beli Obat'),
+              icon: Icon(Icons.question_answer), label: 'Tanya\nDokter'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined), label: 'Profil'),
+              icon: Icon(Icons.medication), label: 'Beli Obat\n'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined), label: 'Profil\n'),
         ],
         currentIndex: currentindex,
         onTap: onTapped,
-        iconSize: 25,
+        iconSize: 40,
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: Colors.grey[400],
         selectedItemColor: mPrimaryColor,
-        unselectedFontSize: 14,
-        selectedFontSize: 16,
+        unselectedFontSize: 16,
+        selectedFontSize: 18,
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         backgroundColor: Colors.white,
       ),
@@ -66,14 +64,15 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 height: size.height * .45,
                 decoration: BoxDecoration(
-                    image: DecorationImage(
-                        alignment: Alignment.topLeft,
-                        image: AssetImage("assets/images/background.png")),
-                    color: mPrimaryColor,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(40),
-                      bottomRight: Radius.circular(40),
-                    )),
+                  image: DecorationImage(
+                      alignment: Alignment.topLeft,
+                      image: AssetImage("assets/images/background.png")),
+                  color: mPrimaryColor,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(40),
+                    bottomRight: Radius.circular(40),
+                  ),
+                ),
               ),
               SafeArea(
                 child: Padding(
@@ -83,40 +82,105 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       Container(
                         height: 55,
                         decoration: BoxDecoration(
-                          color: Colors.white10,
+                          color: Colors.transparent,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SvgPicture.asset(
-                              'assets/images/logo.svg',
-                              height: 50,
+                            Container(
+                              child: Image.asset(
+                                'assets/images/coba.png',
+                                height: 100,
+                              ),
                             ),
-                            ActionChip(
-                                label: Text(''),
-                                avatar: Icon(Icons.shopping_cart),
-                                onPressed: () {})
+                            Container(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Keranjang()));
+                                    },
+                                    icon: Icon(
+                                      Icons.shopping_cart_outlined,
+                                      size: 40,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProfileScreen()));
+                                    },
+                                    icon: Icon(
+                                      Icons.account_circle_outlined,
+                                      size: 40,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        'Halo\n' + user.displayName!,
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: mPrimaryTextColor,
-                          height: 1.5,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.5,
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     Navigator.pushNamed(context, '/profil');
+                      //   },
+                      //   child: Container(
+                      //     height: 80,
+                      //     decoration: BoxDecoration(color: Colors.transparent),
+                      //     child: Stack(children: [
+                      //       Positioned(
+                      //         top: 5,
+                      //         child: Row(
+                      //           mainAxisAlignment:
+                      //               MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             Text(
+                      //               'Hai,\n' + user.displayName!,
+                      //               style: TextStyle(
+                      //                 fontSize: 22,
+                      //                 color: mPrimaryTextColor,
+                      //                 height: 1.5,
+                      //                 fontWeight: FontWeight.bold,
+                      //                 letterSpacing: 1.5,
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //       Positioned(
+                      //         top: 15,
+                      //         left: 250,
+                      //         child: Text(
+                      //           'Lihat Profil',
+                      //           style: TextStyle(
+                      //             color: mPrimaryTextColor,
+                      //             fontStyle: FontStyle.italic,
+                      //           ),
+                      //         ),
+                      //       )
+                      //     ]),
+                      //   ),
+                      // ),
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 20),
                         padding: EdgeInsets.symmetric(
@@ -137,8 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: InputDecoration(
                             hintText: "Ketik disini untuk mencari....",
                             hintStyle: TextStyle(
-                                fontSize: 18,
-                                color: mSecondaryTextColor.withOpacity(0.90)),
+                                fontSize: 18, color: mSecondaryTextColor),
                             suffixIcon: Icon(
                               Icons.search,
                               size: 30,
@@ -158,29 +221,45 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisSpacing: 10,
                           children: <Widget>[
                             CategoryMenu(
-                              imgSrc: "assets/images/Tanyadok.png",
+                              imgSrc: "assets/images/konsul.png",
                               judul: "Tanya Dokter",
                               press: () {
-                                Navigator.pushNamed(context, '/tanyaDok');
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => TanyaDokter()));
                               },
                             ),
                             CategoryMenu(
                               imgSrc: "assets/images/obat.png",
                               judul: "Beli Obat",
                               press: () {
-                                Navigator.pushNamed(context, '/beliObat');
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => BeliObat()));
                               },
                             ),
                             CategoryMenu(
-                              imgSrc: "assets/images/Date.png",
+                              imgSrc: "assets/images/janji.png",
                               judul: "Buat Janji",
                               press: () {
-                                Navigator.pushNamed(context, '/buatJanji');
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => BuatJanji()));
                               },
                             ),
                             CategoryMenu(
-                              imgSrc: "assets/images/Artikel.png",
+                              imgSrc: "assets/images/dokter@246x.png",
+                              judul: "Dokter",
+                              press: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => DokterScreen()));
+                              },
+                            ),
+                            CategoryMenu(
+                              imgSrc: "assets/images/artkel.png",
                               judul: "Artikel",
+                              press: () {},
+                            ),
+                            CategoryMenu(
+                              imgSrc: "assets/images/rs.png",
+                              judul: "Rumah Sakit",
                               press: () {},
                             ),
                           ],
