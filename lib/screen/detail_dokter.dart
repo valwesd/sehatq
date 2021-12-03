@@ -28,7 +28,8 @@ class _DetailDokterState extends State<DetailDokter> {
           height: 85,
           color: Colors.white,
           margin: EdgeInsets.symmetric(vertical: 5),
-          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+          padding:
+              EdgeInsets.symmetric(vertical: 2, horizontal: kDefaultPadding),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,13 +51,20 @@ class _DetailDokterState extends State<DetailDokter> {
           ),
         ),
         appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/background.png'),
+                    fit: BoxFit.cover)),
+          ),
           elevation: 0,
           backgroundColor: mPrimaryColor,
           title: Text(
-            widget.dokNama,
+            widget.dokNama.toUpperCase(),
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
+            padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
             icon: Icon(
               Icons.arrow_back,
               size: 40,
@@ -70,7 +78,7 @@ class _DetailDokterState extends State<DetailDokter> {
         body: SingleChildScrollView(
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(kDefaultPadding),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

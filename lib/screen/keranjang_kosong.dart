@@ -10,11 +10,18 @@ class KeranjangKosong extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/background.png'),
+                    fit: BoxFit.cover)),
+          ),
           elevation: 0,
           backgroundColor: mPrimaryColor,
           title: Text("Keranjang",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           leading: IconButton(
+            padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
             icon: Icon(Icons.arrow_back, size: 40),
             onPressed: () {
               Navigator.pop(context);
@@ -30,10 +37,10 @@ class KeranjangKosong extends StatelessWidget {
               child: SvgPicture.asset('assets/images/keranjang_kosong.svg'),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(kDefaultPadding),
               child: Center(
                 child: Text(
-                  'Keranjang belanja anda masih kosong',
+                  'Keranjang belanja anda masih kosong'.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 20,

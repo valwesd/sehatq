@@ -20,9 +20,16 @@ class _BeliObatState extends State<BeliObat> {
     //Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/background.png'),
+                    fit: BoxFit.cover)),
+          ),
           elevation: 0,
           backgroundColor: mPrimaryColor,
           leading: IconButton(
+            padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => HomeScreen()));
@@ -33,7 +40,7 @@ class _BeliObatState extends State<BeliObat> {
             ),
           ),
           title: Text(
-            'Beli Obat',
+            'Beli Obat'.toUpperCase(),
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
@@ -41,15 +48,23 @@ class _BeliObatState extends State<BeliObat> {
           ),
           actions: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: IconButton(
+              padding: const EdgeInsets.only(right: kDefaultPadding),
+              child: ActionChip(
+                backgroundColor: mPrimaryColor.withOpacity(0.40),
+                label: Text('Keranjang',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: mSecondaryTextColor,
+                    )),
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Keranjang()));
                 },
-                icon: Icon(
+                avatar: Icon(
                   Icons.shopping_cart_outlined,
-                  size: 40,
+                  size: 30,
+                  color: mSecondaryTextColor,
                 ),
               ),
             ),
@@ -126,7 +141,7 @@ class _BeliObatState extends State<BeliObat> {
                             ),
                           ),
                           SizedBox(
-                            height: 100,
+                            height: 110,
                           ),
                           Container(
                             margin:
@@ -210,7 +225,7 @@ class _BeliObatState extends State<BeliObat> {
                                                           text:
                                                               infoObat['nama'],
                                                           style: TextStyle(
-                                                            fontSize: 18,
+                                                            fontSize: 20,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             color:
@@ -268,19 +283,13 @@ class _BeliObatState extends State<BeliObat> {
                     Positioned(
                       top: 40,
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: kDefaultPadding),
                         width: MediaQuery.of(context).size.width,
                         color: Colors.white,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CategoryToko(
-                              imgSrc: "assets/images/kategori_toko_menu.png",
-                              label: "Semua Kategori",
-                            ),
-                            SizedBox(
-                              width: 1,
-                            ),
                             CategoryToko(
                               imgSrc: "assets/images/kategori_toko_vitamin.png",
                               label: "Vitamin",
@@ -302,6 +311,11 @@ class _BeliObatState extends State<BeliObat> {
                             ),
                             SizedBox(
                               width: 1,
+                            ),
+                            CategoryToko(
+                              imgSrc:
+                                  "assets/images/kategori_toko_makanan_minuman.png",
+                              label: "Alat Kesehatan",
                             ),
                           ],
                         ),

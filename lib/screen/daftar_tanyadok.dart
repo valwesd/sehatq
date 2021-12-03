@@ -18,9 +18,16 @@ class _TanyaGratisState extends State<TanyaGratis> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover)),
+        ),
         elevation: 0,
         backgroundColor: mPrimaryColor,
         leading: IconButton(
+          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -30,7 +37,7 @@ class _TanyaGratisState extends State<TanyaGratis> {
           ),
         ),
         title: Text(
-          'Daftar Konsultasi',
+          'Daftar Konsultasi'.toUpperCase(),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -52,7 +59,7 @@ class _TanyaGratisState extends State<TanyaGratis> {
                       text: TextSpan(
                         style: TextStyle(
                           letterSpacing: 0.1,
-                          fontSize: 12,
+                          fontSize: 16,
                         ),
                         children: [
                           TextSpan(
@@ -93,7 +100,6 @@ class _TanyaGratisState extends State<TanyaGratis> {
                           TextSpan(
                             text: "\n\nKamu konsultasi untuk siapa?",
                             style: TextStyle(
-                              fontSize: 14,
                               color: mSecondaryTextColor,
                               fontWeight: FontWeight.bold,
                             ),
@@ -192,7 +198,7 @@ class _TanyaGratisState extends State<TanyaGratis> {
                         ),
                         child: TextField(
                           decoration: InputDecoration(
-                            hintText: "Isikan tanggal lahir disini",
+                            hintText: "Contoh: 17-08-1945",
                             hintStyle:
                                 TextStyle(fontSize: 18, color: Colors.grey),
                             border: InputBorder.none,
@@ -209,8 +215,8 @@ class _TanyaGratisState extends State<TanyaGratis> {
                       ),
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 5),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: kDefaultPadding, vertical: 5),
                         width: size.width,
                         height: 55,
                         decoration: BoxDecoration(
@@ -297,7 +303,7 @@ class _TanyaGratisState extends State<TanyaGratis> {
                           ),
                           child: Text(
                             'Lanjutkan',
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 22),
                           ))
                     ],
                   ),
@@ -316,7 +322,7 @@ class _TanyaGratisState extends State<TanyaGratis> {
             borderRadius: BorderRadius.circular(13),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -324,7 +330,10 @@ class _TanyaGratisState extends State<TanyaGratis> {
                 SizedBox(
                   height: 12,
                 ),
-                Text('Apakah data yang anda masukan sudah benar?'),
+                Text(
+                  'Apakah data yang anda masukan sudah benar?',
+                  style: TextStyle(fontSize: 18),
+                ),
                 SizedBox(
                   height: 12,
                 ),
@@ -336,7 +345,7 @@ class _TanyaGratisState extends State<TanyaGratis> {
                         primary: mPrimaryColor,
                       ),
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => DataTunggu()));
@@ -344,7 +353,7 @@ class _TanyaGratisState extends State<TanyaGratis> {
                       child: Text(
                         'Ya',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 20,
                           color: Colors.white,
                         ),
                       ),
@@ -359,7 +368,7 @@ class _TanyaGratisState extends State<TanyaGratis> {
                         child: Text(
                           'Tidak',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 20,
                             color: mSecondaryTextColor.withOpacity(0.75),
                           ),
                         ))

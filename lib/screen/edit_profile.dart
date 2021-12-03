@@ -28,11 +28,18 @@ class _EditProfile extends State<EditProfile> {
 
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover)),
+        ),
         elevation: 0,
         backgroundColor: mPrimaryColor,
-        title: Text("Ubah Profil",
+        title: Text("Ubah Profil".toUpperCase(),
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         leading: IconButton(
+          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
           icon: Icon(Icons.arrow_back, size: 40),
           onPressed: () {
             Navigator.pop(context);
@@ -44,7 +51,7 @@ class _EditProfile extends State<EditProfile> {
           color: Colors.white,
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(kDefaultPadding),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -84,6 +91,7 @@ class _EditProfile extends State<EditProfile> {
                     ),
                     TextField(
                       decoration: InputDecoration(
+                        hintText: 'contoh: 17-08-1945',
                         border: OutlineInputBorder(),
                       ),
                       keyboardType: TextInputType.datetime,
@@ -98,7 +106,8 @@ class _EditProfile extends State<EditProfile> {
                       height: 5,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: kDefaultPadding, vertical: 5),
                       width: size.width,
                       height: 55,
                       decoration: BoxDecoration(
@@ -176,6 +185,7 @@ class _EditProfile extends State<EditProfile> {
                     TextField(
                       controller: alamatController,
                       decoration: InputDecoration(
+                        hintText: 'contoh: Jl. Sendowo Blok D No.77',
                         border: OutlineInputBorder(),
                       ),
                       keyboardType: TextInputType.streetAddress,

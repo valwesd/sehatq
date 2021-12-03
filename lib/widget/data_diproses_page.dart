@@ -15,6 +15,7 @@ class DataTunggu extends StatelessWidget {
           backgroundColor: mPrimaryColor,
           title: Text(""),
           leading: IconButton(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             icon: Icon(Icons.arrow_back, size: 40),
             onPressed: () {
               Navigator.pop(context);

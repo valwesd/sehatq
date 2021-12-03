@@ -36,9 +36,16 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
     Color disableColor = Colors.white;
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover)),
+        ),
         elevation: 0,
         backgroundColor: mPrimaryColor,
         leading: IconButton(
+          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -48,7 +55,7 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
           ),
         ),
         title: Text(
-          'Pilih Jadwal Praktik',
+          'Pilih Jadwal Praktik'.toUpperCase(),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -61,7 +68,8 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
           children: [
             Container(
               height: 150,
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  vertical: 20, horizontal: kDefaultPadding),
               decoration: BoxDecoration(
                 color: Colors.white,
               ),
@@ -123,7 +131,8 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               width: MediaQuery.of(context).size.width,
               height: 300,
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  vertical: 5, horizontal: kDefaultPadding),
               decoration: BoxDecoration(
                   color: mBackgroundColor,
                   border: Border.all(color: mPrimaryColor),
@@ -134,7 +143,7 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 0),
+                          vertical: 8, horizontal: kDefaultPadding),
                       child: Text(
                         'Pilih Jadwal Praktik',
                         style: TextStyle(
@@ -146,9 +155,11 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 10),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(vertical: 5),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: kDefaultPadding),
                             decoration: BoxDecoration(
                               border: Border(
                                   bottom: BorderSide(
@@ -162,7 +173,7 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
                                   'Kamis, 25 November 2021',
                                   style: TextStyle(
                                       color:
-                                          mSecondaryTextColor.withOpacity(0.75),
+                                          mSecondaryTextColor.withOpacity(0.95),
                                       fontSize: 16),
                                 ),
                                 Row(
@@ -175,6 +186,12 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
                                             Border.all(color: mPrimaryColor),
                                         borderRadius: BorderRadius.circular(3),
                                         child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: _colorContainer,
+                                              border: Border.all(
+                                                  color: mPrimaryColor)),
                                           child: Center(
                                             child: Text(
                                               '09:00 - 11:00',
@@ -186,9 +203,8 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
                                               ),
                                             ),
                                           ),
-                                          width: 115,
-                                          height: 30,
-                                          color: _colorContainer,
+                                          width: 110,
+                                          height: 35,
                                         ),
                                         onTap: () {
                                           setState(() {
@@ -207,6 +223,7 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
                                         });
                                       },
                                       style: TextButton.styleFrom(
+                                        side: BorderSide(color: mPrimaryColor),
                                         minimumSize: Size(35, 30),
                                         elevation: 0,
                                         backgroundColor: indexCol == 1
@@ -228,7 +245,8 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(vertical: 5),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: kDefaultPadding),
                             decoration: BoxDecoration(
                               border: Border(
                                   bottom: BorderSide(
@@ -242,7 +260,7 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
                                   'Selasa, 30 November 2021',
                                   style: TextStyle(
                                       color:
-                                          mSecondaryTextColor.withOpacity(0.75),
+                                          mSecondaryTextColor.withOpacity(0.95),
                                       fontSize: 16),
                                 ),
                                 Row(
@@ -256,6 +274,7 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
                                         });
                                       },
                                       style: TextButton.styleFrom(
+                                        side: BorderSide(color: mPrimaryColor),
                                         minimumSize: Size(35, 30),
                                         elevation: 0,
                                         backgroundColor: indexCol == 2
@@ -278,6 +297,7 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
                                         });
                                       },
                                       style: TextButton.styleFrom(
+                                        side: BorderSide(color: mPrimaryColor),
                                         minimumSize: Size(35, 30),
                                         elevation: 0,
                                         backgroundColor: indexCol == 3
@@ -298,6 +318,32 @@ class _PilihJadwalDok extends State<PilihJadwalDok> {
                               ],
                             ),
                           ),
+                          Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: kDefaultPadding),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                        width: 1, color: mPrimaryColor)),
+                              ),
+                              child: Container(
+                                margin: EdgeInsets.only(top: 10),
+                                height: 40,
+                                color: Colors.white,
+                                child: OutlinedButton(
+                                    style: OutlinedButton.styleFrom(
+                                      onSurface: Colors.white,
+                                      side: BorderSide(color: mPrimaryColor),
+                                    ),
+                                    onPressed: () {},
+                                    child: Text(
+                                      'Pilih Jadwal lain',
+                                      style: TextStyle(
+                                          color: mSecondaryTextColor
+                                              .withOpacity(0.95),
+                                          fontSize: 16),
+                                    )),
+                              )),
                         ],
                       ),
                     ),

@@ -10,6 +10,6 @@ const mPrimaryTextColor = Color(0xFFFFFFFF);
 
 const mSecondaryTextColor = Color(0xFFF325254);
 
-const kDefaultPadding = 20.0;
+const kDefaultPadding = 10.0;
 
 const iconLogo = 'assets/images/Logo.svg';

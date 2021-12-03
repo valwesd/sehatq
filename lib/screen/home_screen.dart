@@ -48,9 +48,10 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: onTapped,
         iconSize: 40,
         type: BottomNavigationBarType.fixed,
-        unselectedItemColor: Colors.grey[400],
+        unselectedItemColor: mSecondaryTextColor.withOpacity(0.65),
         selectedItemColor: mPrimaryColor,
         unselectedFontSize: 16,
+        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         selectedFontSize: 18,
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         backgroundColor: Colors.white,
@@ -82,28 +83,38 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(
-                        height: 5,
+                        height: 3,
                       ),
                       Container(
-                        height: 55,
+                        height: 50,
                         decoration: BoxDecoration(
                           color: Colors.transparent,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               child: Image.asset(
                                 'assets/images/coba.png',
-                                height: 100,
+                                height: 80,
                               ),
                             ),
                             Container(
-                              child: Row(
+                              child: Column(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  IconButton(
+                                  ActionChip(
+                                    backgroundColor:
+                                        mPrimaryColor.withOpacity(0.40),
+                                    label: Text('Keranjang',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                          color: mSecondaryTextColor,
+                                        )),
                                     onPressed: () {
                                       Navigator.push(
                                           context,
@@ -111,34 +122,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                               builder: (context) =>
                                                   Keranjang()));
                                     },
-                                    icon: Icon(
+                                    avatar: Icon(
                                       Icons.shopping_cart_outlined,
-                                      size: 40,
-                                      color: Colors.white,
+                                      size: 30,
+                                      color: mSecondaryTextColor,
                                     ),
                                   ),
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProfileScreen()));
-                                    },
-                                    icon: Icon(
-                                      Icons.account_circle_outlined,
-                                      size: 40,
-                                      color: Colors.white,
-                                    ),
-                                  )
                                 ],
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
                       ),
                       // InkWell(
                       //   onTap: () {
@@ -182,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       //   ),
                       // ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 20),
+                        margin: EdgeInsets.only(top: 10, bottom: 10),
                         padding: EdgeInsets.symmetric(
                             horizontal: kDefaultPadding, vertical: 5),
                         height: 54,
@@ -214,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                         child: GridView.count(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 1, vertical: 5),
+                              EdgeInsets.symmetric(horizontal: 1, vertical: 10),
                           crossAxisCount: 2,
                           childAspectRatio: 0.85,
                           crossAxisSpacing: 10,
@@ -245,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                             CategoryMenu(
-                              imgSrc: "assets/images/dokter@246x.png",
+                              imgSrc: "assets/images/dokter_1.png",
                               judul: "Dokter",
                               press: () {
                                 Navigator.of(context).push(MaterialPageRoute(

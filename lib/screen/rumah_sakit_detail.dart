@@ -24,13 +24,20 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover)),
+        ),
         elevation: 0,
         backgroundColor: mPrimaryColor,
         title: Text(
-          widget.rsNama,
+          widget.rsNama.toUpperCase(),
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
+          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
           icon: Icon(
             Icons.arrow_back,
             size: 40,
@@ -44,8 +51,9 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   //margin: EdgeInsets.symmetric(horizontal: 5),
@@ -59,9 +67,10 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
                   child: Column(
                     children: [
                       Container(
-                        height: 130,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        height: 140,
+                        padding: EdgeInsets.symmetric(
+                            vertical: kDefaultPadding,
+                            horizontal: kDefaultPadding),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +87,7 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
                             Container(
                               width: 200,
                               padding: EdgeInsets.symmetric(
-                                horizontal: 15,
+                                horizontal: kDefaultPadding,
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -90,11 +99,16 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
                                       color:
                                           mSecondaryTextColor.withOpacity(0.75),
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18,
+                                      fontSize: 20,
                                     ),
                                   ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
                                   Text(
-                                      '\nRumah Sakit\nGondokusuman, Yogyakarta')
+                                    'Rumah Sakit\nGondokusuman, Yogyakarta',
+                                    style: TextStyle(fontSize: 16),
+                                  )
                                 ],
                               ),
                             ),
@@ -103,8 +117,8 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 5, bottom: 10),
-                        padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 5, horizontal: kDefaultPadding),
                         child: RichText(
                             text: TextSpan(
                                 style: TextStyle(
@@ -114,17 +128,24 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
                               TextSpan(
                                   text: 'Jam Operasional\n\n',
                                   style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              TextSpan(text: 'Senin - Minggu 00:00 - 23:59\n'),
-                              TextSpan(text: 'Gawat Darurat 24 Jam\n\n'),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20)),
+                              TextSpan(
+                                  text: 'Senin - Minggu 00:00 - 23:59\n',
+                                  style: TextStyle(fontSize: 16)),
+                              TextSpan(
+                                  text: 'Gawat Darurat 24 Jam\n\n',
+                                  style: TextStyle(fontSize: 16)),
                               TextSpan(
                                   text: 'Alamat\n\n',
                                   style: TextStyle(
                                     //height: 1,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   )),
-                              TextSpan(text: widget.rsAlamat),
+                              TextSpan(
+                                  text: widget.rsAlamat,
+                                  style: TextStyle(fontSize: 16)),
                             ])),
                       ),
                     ],
@@ -132,7 +153,8 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 10),
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 5, horizontal: kDefaultPadding),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border(
@@ -154,7 +176,8 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 5, horizontal: kDefaultPadding),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border(
@@ -176,7 +199,8 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 5, horizontal: kDefaultPadding),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border(
@@ -185,7 +209,7 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
                     color: Colors.transparent,
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ListMata()));
@@ -203,7 +227,8 @@ class _RumahSakitDetailState extends State<RumahSakitDetail> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 5, horizontal: kDefaultPadding),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border(

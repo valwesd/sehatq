@@ -10,16 +10,23 @@ class ProfileScreen extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover)),
+        ),
         elevation: 0,
         backgroundColor: mPrimaryColor,
         title: Text(
-          "Profil Saya",
+          "Profil Saya".toUpperCase(),
           style: TextStyle(
               color: mPrimaryTextColor,
               fontWeight: FontWeight.bold,
               fontSize: 20),
         ),
         leading: IconButton(
+          padding: EdgeInsets.symmetric(horizontal: 10),
           icon: Icon(
             Icons.arrow_back,
             size: 40,
@@ -30,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: IconButton(
               onPressed: () {},
               icon: Icon(
@@ -46,6 +53,7 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 height: 160,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -61,152 +69,149 @@ class ProfileScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                child: Stack(
+                child: Row(
                   children: [
-                    Positioned(
-                      top: 10,
-                      left: 5,
+                    Container(
                       child: Icon(
                         Icons.account_circle_outlined,
                         size: 130,
                         color: Colors.grey.withOpacity(0.50),
                       ),
                     ),
-                    Positioned(
-                      top: 20,
-                      left: 137,
-                      child: RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: user.displayName! + '\n',
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: RichText(
+                            textAlign: TextAlign.start,
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: user.displayName! + '\n',
+                                  style: TextStyle(
+                                      color:
+                                          mSecondaryTextColor.withOpacity(0.75),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(
+                                  text: user.email,
+                                  style: TextStyle(
+                                    height: 1.5,
+                                    color: Colors.grey,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 50,
+                          width: 200,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '60',
+                                      style: TextStyle(
+                                        color: mPrimaryColor,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Usia',
+                                      style: TextStyle(
+                                        color: mSecondaryTextColor
+                                            .withOpacity(0.75),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '160',
+                                      style: TextStyle(
+                                        color: mPrimaryColor,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Tinggi',
+                                      style: TextStyle(
+                                        color: mSecondaryTextColor
+                                            .withOpacity(0.75),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '60',
+                                      style: TextStyle(
+                                        color: mPrimaryColor,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Berat',
+                                      style: TextStyle(
+                                        color: mSecondaryTextColor
+                                            .withOpacity(0.75),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                                elevation: 0,
+                                primary: mPrimaryColor,
+                                side: BorderSide(color: mPrimaryColor)),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/editProfile');
+                            },
+                            child: Text(
+                              'Ubah Profil',
                               style: TextStyle(
-                                  color: mSecondaryTextColor.withOpacity(0.75),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
+                                  fontStyle: FontStyle.italic, fontSize: 18),
                             ),
-                            TextSpan(
-                              text: user.email,
-                              style: TextStyle(
-                                height: 1.5,
-                                color: Colors.grey,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 64,
-                      left: 125,
-                      child: Container(
-                        height: 50,
-                        width: 200,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '24',
-                                    style: TextStyle(
-                                      color: mPrimaryColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Usia',
-                                    style: TextStyle(
-                                      color:
-                                          mSecondaryTextColor.withOpacity(0.75),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '24',
-                                    style: TextStyle(
-                                      color: mPrimaryColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Tinggi',
-                                    style: TextStyle(
-                                      color:
-                                          mSecondaryTextColor.withOpacity(0.75),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '24',
-                                    style: TextStyle(
-                                      color: mPrimaryColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Berat',
-                                    style: TextStyle(
-                                      color:
-                                          mSecondaryTextColor.withOpacity(0.75),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 110,
-                      left: 140,
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            elevation: 0,
-                            primary: mPrimaryColor,
-                            side: BorderSide(color: mPrimaryColor)),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/editProfile');
-                        },
-                        child: Text(
-                          'Ubah Profil',
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic, fontSize: 18),
-                        ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
               ),
               Container(
                 margin: EdgeInsets.symmetric(
-                    horizontal: 15, vertical: kDefaultPadding),
+                    horizontal: 10, vertical: kDefaultPadding),
                 padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
                 height: size.height * 0.28,
                 decoration: BoxDecoration(
@@ -325,7 +330,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
                 height: size.height * 0.30,
                 decoration: BoxDecoration(
@@ -352,7 +357,8 @@ class ProfileScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(vertical: 20),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: kDefaultPadding),
                               child: RichText(
                                 text: TextSpan(
                                   children: [

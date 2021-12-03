@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:sehatq/constant.dart';
 import 'package:sehatq/screen/pilih_jadwal_dokter.dart';
 
+import 'keranjang.dart';
+
 class DokterScreen extends StatefulWidget {
   const DokterScreen({Key? key}) : super(key: key);
 
@@ -20,9 +22,16 @@ class _DokterScreenState extends State<DokterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover)),
+        ),
         elevation: 0,
         backgroundColor: mPrimaryColor,
         leading: IconButton(
+          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -32,7 +41,7 @@ class _DokterScreenState extends State<DokterScreen> {
           ),
         ),
         title: Text(
-          'Dokter',
+          'Dokter'.toUpperCase(),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -40,12 +49,23 @@ class _DokterScreenState extends State<DokterScreen> {
         ),
         actions: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.history,
-                size: 40,
+            padding: const EdgeInsets.only(right: kDefaultPadding),
+            child: ActionChip(
+              backgroundColor: mPrimaryColor.withOpacity(0.40),
+              label: Text('Keranjang',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: mSecondaryTextColor,
+                  )),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Keranjang()));
+              },
+              avatar: Icon(
+                Icons.shopping_cart_outlined,
+                size: 30,
+                color: mSecondaryTextColor,
               ),
             ),
           )
@@ -119,12 +139,12 @@ class _DokterScreenState extends State<DokterScreen> {
                               style: TextStyle(
                                 color: mSecondaryTextColor,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 22,
                               ),
                             ),
                           ]),
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: 10),
                     StreamBuilder(
                       stream: _dataDokter
                           .child('dokter_tanya')
@@ -147,7 +167,8 @@ class _DokterScreenState extends State<DokterScreen> {
                                           spesialis: infoDokter['spesialis'])));
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 20),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: kDefaultPadding),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     border: Border(
@@ -174,7 +195,7 @@ class _DokterScreenState extends State<DokterScreen> {
                                                   TextSpan(
                                                     text: infoDokter['nama'],
                                                     style: TextStyle(
-                                                      fontSize: 18,
+                                                      fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.normal,
                                                       color:
@@ -188,7 +209,7 @@ class _DokterScreenState extends State<DokterScreen> {
                                                     style: TextStyle(
                                                       height: 0.4,
                                                       letterSpacing: 0.3,
-                                                      fontSize: 16,
+                                                      fontSize: 18,
                                                       fontWeight:
                                                           FontWeight.normal,
                                                       color: mPrimaryColor,
@@ -268,7 +289,7 @@ class _DokterScreenState extends State<DokterScreen> {
                                     color: Colors.grey.withOpacity(0.25),
                                     width: 1)),
                             child: ListView(
-                              padding: EdgeInsets.all(5),
+                              padding: EdgeInsets.all(0),
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               children: tilesList,

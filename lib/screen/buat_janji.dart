@@ -18,9 +18,16 @@ class _BuatJanjiState extends State<BuatJanji> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover)),
+        ),
         elevation: 0,
         backgroundColor: mPrimaryColor,
         leading: IconButton(
+          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -30,7 +37,7 @@ class _BuatJanjiState extends State<BuatJanji> {
           ),
         ),
         title: Text(
-          'Buat Janji',
+          'Buat Janji'.toUpperCase(),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -38,12 +45,20 @@ class _BuatJanjiState extends State<BuatJanji> {
         ),
         actions: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: IconButton(
+            padding: const EdgeInsets.only(right: kDefaultPadding),
+            child: ActionChip(
+              backgroundColor: mPrimaryColor.withOpacity(0.40),
+              label: Text('Riwayat',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: mSecondaryTextColor,
+                  )),
               onPressed: () {},
-              icon: Icon(
-                Icons.history,
-                size: 40,
+              avatar: Icon(
+                Icons.history_outlined,
+                size: 30,
+                color: mSecondaryTextColor,
               ),
             ),
           )
@@ -111,7 +126,7 @@ class _BuatJanjiState extends State<BuatJanji> {
                         style: TextStyle(
                           color: mSecondaryTextColor.withOpacity(0.75),
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: 22,
                         ),
                       ),
                     ),
@@ -173,7 +188,7 @@ class _BuatJanjiState extends State<BuatJanji> {
                                                     text:
                                                         infoRumahSakit['nama'],
                                                     style: TextStyle(
-                                                      fontSize: 16,
+                                                      fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color:
@@ -185,7 +200,7 @@ class _BuatJanjiState extends State<BuatJanji> {
                                                     text: infoRumahSakit[
                                                         'alamat'],
                                                     style: TextStyle(
-                                                      fontSize: 14,
+                                                      fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.normal,
                                                       color: Colors.grey,

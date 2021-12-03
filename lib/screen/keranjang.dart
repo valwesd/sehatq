@@ -56,13 +56,20 @@ class Keranjang extends StatelessWidget {
           ),
         ),
         appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/background.png'),
+                    fit: BoxFit.cover)),
+          ),
           elevation: 0,
           backgroundColor: mPrimaryColor,
           title: Text(
-            "Keranjang",
+            "Keranjang".toUpperCase(),
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
+            padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
             icon: Icon(
               Icons.arrow_back,
               size: 40,
@@ -74,7 +81,8 @@ class Keranjang extends StatelessWidget {
         ),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            padding:
+                EdgeInsets.symmetric(vertical: 10, horizontal: kDefaultPadding),
             child: Column(
               children: [
                 SizedBox(
@@ -100,100 +108,156 @@ class Keranjang extends StatelessWidget {
                                     bottom: BorderSide(
                                         width: 1, color: Colors.grey)),
                               ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  ClipRRect(
-                                    child: CachedNetworkImage(
-                                      imageUrl: isiKeranjang['foto1'],
-                                      height: 100,
-                                      width: 80,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                              child: Column(
+                                children: [
                                   Container(
-                                    width: 120,
-                                    child: Column(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 10),
+                                    margin: EdgeInsets.only(bottom: 5),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              width: 1, color: Colors.grey)),
+                                    ),
+                                    child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                          MainAxisAlignment.start,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.center,
                                       children: <Widget>[
-                                        RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              TextSpan(
-                                                text: isiKeranjang['nama'],
-                                                style: TextStyle(
-                                                  letterSpacing: 0,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: mSecondaryTextColor,
+                                        ClipRRect(
+                                          child: CachedNetworkImage(
+                                            imageUrl: isiKeranjang['foto2'],
+                                            height: 50,
+                                            width: 50,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Container(
+                                          alignment: Alignment.centerRight,
+                                          width: 110,
+                                          child: RichText(
+                                            text: TextSpan(
+                                              children: [
+                                                TextSpan(
+                                                  text: isiKeranjang['nama2'],
+                                                  style: TextStyle(
+                                                    letterSpacing: 0,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: mSecondaryTextColor,
+                                                  ),
                                                 ),
-                                              ),
-                                              TextSpan(text: '\n\n'),
-                                              TextSpan(
-                                                text: isiKeranjang['harga'],
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: mPrimaryColor,
-                                                ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                  Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 5),
-                                    child: Column(
-                                      children: [
-                                        OutlinedButton(
-                                            style: OutlinedButton.styleFrom(
-                                              backgroundColor: mSecondaryColor,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      ClipRRect(
+                                        child: CachedNetworkImage(
+                                          imageUrl: isiKeranjang['foto1'],
+                                          height: 100,
+                                          width: 80,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 120,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: isiKeranjang['nama'],
+                                                    style: TextStyle(
+                                                      letterSpacing: 0,
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      color:
+                                                          mSecondaryTextColor,
+                                                    ),
+                                                  ),
+                                                  TextSpan(text: '\n\n'),
+                                                  TextSpan(
+                                                    text: isiKeranjang['harga'],
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: mPrimaryColor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                            onPressed: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          KeranjangKosong()));
-                                            },
-                                            child: Text(
-                                              'Hapus',
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: kDefaultPadding),
+                                        child: Column(
+                                          children: [
+                                            OutlinedButton(
+                                                style: OutlinedButton.styleFrom(
+                                                  backgroundColor:
+                                                      mSecondaryColor,
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              KeranjangKosong()));
+                                                },
+                                                child: Text(
+                                                  'Hapus',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white),
+                                                )),
+                                            Text(
+                                              'Jumlah:',
                                               style: TextStyle(
                                                   fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white),
-                                            )),
-                                        Text(
-                                          'Jumlah:',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 5),
+                                              height: 30,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: mPrimaryColor)),
+                                              child: Center(
+                                                  child: Text(
+                                                '1',
+                                                style: TextStyle(fontSize: 18),
+                                              )),
+                                            )
+                                          ],
                                         ),
-                                        Container(
-                                          margin:
-                                              EdgeInsets.symmetric(vertical: 5),
-                                          height: 20,
-                                          width: 60,
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: mPrimaryColor)),
-                                          child: Center(
-                                              child: Text(
-                                            '1',
-                                            style: TextStyle(fontSize: 16),
-                                          )),
-                                        )
-                                      ],
-                                    ),
-                                  )
+                                      )
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
@@ -208,10 +272,15 @@ class Keranjang extends StatelessWidget {
                             border: Border.all(
                                 color: Colors.grey.withOpacity(0.25),
                                 width: 1)),
-                        child: ListView(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          children: tilesList,
+                        child: Column(
+                          children: [
+                            Container(),
+                            ListView(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              children: tilesList,
+                            ),
+                          ],
                         ),
                       );
                     }

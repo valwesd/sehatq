@@ -19,9 +19,16 @@ class _ListMata extends State<ListMata> {
     final _dataDokter = FirebaseDatabase.instance.reference();
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover)),
+        ),
         elevation: 0,
         backgroundColor: mPrimaryColor,
         leading: IconButton(
+          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -31,7 +38,7 @@ class _ListMata extends State<ListMata> {
           ),
         ),
         title: Text(
-          'Pilih Dokter',
+          'Pilih Dokter'.toUpperCase(),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -69,7 +76,7 @@ class _ListMata extends State<ListMata> {
                               },
                               child: Container(
                                 padding: EdgeInsets.symmetric(
-                                    vertical: 20, horizontal: 20),
+                                    vertical: 20, horizontal: kDefaultPadding),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   border: Border(
@@ -91,7 +98,7 @@ class _ListMata extends State<ListMata> {
                                       ),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.all(5),
+                                      padding: EdgeInsets.all(kDefaultPadding),
                                       width: 200,
                                       child: Column(
                                         mainAxisAlignment:
@@ -154,7 +161,6 @@ class _ListMata extends State<ListMata> {
                                   color: Colors.grey.withOpacity(0.25),
                                   width: 1)),
                           child: ListView(
-                            padding: EdgeInsets.all(5),
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             children: tilesList,
