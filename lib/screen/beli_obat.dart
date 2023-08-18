@@ -1,3 +1,6 @@
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +19,7 @@ class BeliObat extends StatefulWidget {
 class _BeliObatState extends State<BeliObat> {
   @override
   Widget build(BuildContext context) {
-    final _dataObat = FirebaseDatabase.instance.reference();
+    final _dataObat = FirebaseDatabase.instance.ref();
     //Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(

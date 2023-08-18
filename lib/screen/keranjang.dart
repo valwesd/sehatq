@@ -10,6 +10,7 @@ class Keranjang extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     final dataKeranjang = FirebaseDatabase.instance.reference();
     return Scaffold(
         bottomNavigationBar: Container(

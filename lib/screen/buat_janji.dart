@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sehatq/constant.dart';
@@ -13,7 +15,7 @@ class BuatJanji extends StatefulWidget {
 }
 
 class _BuatJanjiState extends State<BuatJanji> {
-  final _dataRS = FirebaseDatabase.instance.reference();
+  final _dataRS = FirebaseDatabase.instance.ref();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
